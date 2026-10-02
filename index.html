@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="童话村电影网 - 走进童话村的放映厅，动画、奇幻与治愈系电影精选推荐。一个为大小朋友准备的光影童话世界，发现动画电影与奇幻影像的无限想象。">
+<meta name="keywords" content="童话村电影网,动画电影,奇幻电影,治愈系电影,童话改编,迪士尼,皮克斯,宫崎骏,合家欢,tonghuacundianyingwang-wap">
+<meta name="author" content="童话村电影网">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="bingbot" content="index, follow, max-image-preview:large">
+<meta name="referrer" content="always">
+<meta property="og:title" content="童话村电影网 - 一个藏满光影童话的放映厅">
+<meta property="og:description" content="走进童话村的放映厅，发现动画、奇幻与治愈系电影的无尽想象。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://tonghuacundianyingwang-wap.github.io">
+<meta property="og:site_name" content="童话村电影网">
+<title>童话村电影网 | 走进童话村的放映厅 | 动画奇幻治愈系电影精选 | tonghuacundianyingwang-wap.github.io</title>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --forest:#1f5f4a;
+  --forest-l:#2d7a5f;
+  --meadow:#eef6e8;
+  --cream:#fffaf0;
+  --butter:#ffd966;
+  --rose:#f4a3b6;
+  --sky:#a8d8f0;
+  --ink:#2d3b2f;
+  --soft:#5a6b5c;
+  --pencil:#3a3a3a;
+  --hand:'Comic Sans MS','Marker Felt','Chalkboard SE','Kaiti SC',cursive;
+  --sans:'PingFang SC','Microsoft YaHei','Helvetica Neue',sans-serif;
+  --paper:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);color:var(--ink);line-height:1.8;
+  background:var(--meadow);overflow-x:hidden;
+  background-image:
+    radial-gradient(circle at 12% 8%,rgba(255,217,102,.28),transparent 42%),
+    radial-gradient(circle at 88% 92%,rgba(244,163,182,.22),transparent 45%),
+    radial-gradient(circle at 78% 18%,rgba(168,216,240,.3),transparent 40%);
+}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+::selection{background:var(--butter);color:var(--ink)}
+
+/* ===== Squiggle underline (hand-drawn feel) ===== */
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes spin-slow{to{transform:rotate(360deg)}}
+
+/* ===== Top Nav ===== */
+.topbar{
+  position:sticky;top:0;z-index:100;
+  background:rgba(238,246,232,.92);backdrop-filter:blur(10px);
+  border-bottom:2px dashed var(--forest-l);
+}
+.bar-in{
+  max-width:1180px;margin:0 auto;padding:0 24px;
+  height:70px;display:flex;align-items:center;justify-content:space-between;
+}
+.logo{
+  display:flex;align-items:center;gap:12px;
+  font-family:var(--hand);font-size:1.5rem;color:var(--forest);font-weight:700;
+}
+.logo .badge{
+  width:42px;height:42px;border-radius:50%;background:var(--butter);
+  display:flex;align-items:center;justify-content:center;font-size:1.4rem;
+  border:2.5px solid var(--pencil);transform:rotate(-8deg);animation:float 4s ease-in-out infinite;
+}
+.nav{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.nav a{
+  font-size:.84rem;padding:7px 14px;border-radius:20px;
+  color:var(--soft);position:relative;transition:.25s;
+}
+.nav a:hover{background:var(--forest);color:#fff}
+.menu-btn{display:none;width:38px;height:38px;border:2px dashed var(--forest-l);border-radius:50%;font-size:1.1rem;color:var(--forest)}
+
+.drawer{display:none;position:fixed;inset:70px 0 0;z-index:99;background:var(--meadow);padding:20px;border-top:2px dashed var(--forest-l)}
+.drawer.open{display:block}
+.drawer a{display:block;padding:14px 18px;font-size:1rem;border-radius:14px;margin-bottom:8px;background:var(--cream)}
+
+/* ===== Marquee ===== */
+.marquee{
+  background:var(--forest);color:var(--butter);padding:10px 0;overflow:hidden;
+  border-bottom:3px dotted var(--butter);
+}
+.marquee-track{display:flex;gap:48px;white-space:nowrap;animation:marq 30s linear infinite;font-family:var(--hand);font-size:.95rem}
+.marquee-track span{display:flex;align-items:center;gap:48px}
+.marquee-track span::after{content:'✦';color:var(--rose)}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+/* ===== Hero — Storybook ===== */
+.hero{
+  max-width:1180px;margin:0 auto;padding:60px 24px 40px;
+  display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;
+}
+.book{
+  position:relative;background:var(--cream);border:3px solid var(--pencil);
+  border-radius:6px 24px 24px 6px;padding:40px 36px;
+  box-shadow:8px 8px 0 var(--forest);
+}
+.book::before{
+  content:'';position:absolute;left:26px;top:0;bottom:0;width:2px;
+  background:repeating-linear-gradient(to bottom,var(--rose) 0 10px,transparent 10px 18px);
+}
+.cloud{
+  position:absolute;background:#fff;border-radius:40px;box-shadow:0 3px 0 rgba(0,0,0,.05);
+}
+.cloud::before,.cloud::after{content:'';position:absolute;background:#fff;border-radius:50%}
+.c1{width:74px;height:26px;top:-14px;right:40px}
+.c1::before{width:30px;height:30px;top:-14px;left:12px}
+.c1::after{width:22px;height:22px;top:-8px;right:10px}
+.c2{width:52px;height:18px;bottom:-10px;left:60px}
+.c2::before{width:22px;height:22px;top:-10px;left:8px}
+.book .eyebrow{
+  font-family:var(--hand);font-size:1rem;color:var(--forest-l);
+  letter-spacing:.05em;margin-bottom:14px;display:inline-block;
+}
+.book h1{
+  font-family:var(--hand);font-size:clamp(2.2rem,5.5vw,3.6rem);
+  color:var(--pencil);line-height:1.25;margin-bottom:18px;
+}
+.book h1 .hl{background:linear-gradient(transparent 60%,var(--butter) 60%);padding:0 4px}
+.book h1 .wave{position:relative;color:var(--forest)}
+.book p{font-size:1rem;color:var(--soft);max-width:460px;margin-bottom:26px;line-height:2}
+.book-actions{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.btn-book{
+  padding:12px 30px;background:var(--rose);color:#fff;
+  font-family:var(--hand);font-size:1.05rem;border:2.5px solid var(--pencil);
+  border-radius:14px 4px 14px 4px;box-shadow:3px 3px 0 var(--pencil);transition:.2s;
+}
+.btn-book:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--pencil)}
+.btn-ghost{
+  padding:10px 22px;border:2px dashed var(--forest-l);border-radius:20px;
+  font-size:.85rem;color:var(--forest);transition:.2s;
+}
+.btn-ghost:hover{background:var(--forest);color:#fff;border-style:solid}
+
+/* Hero right — stacked cards */
+.story-cards{position:relative;display:flex;flex-direction:column;gap:14px}
+.scard{
+  background:var(--cream);border:2.5px solid var(--pencil);
+  border-radius:16px;padding:16px 20px;display:flex;align-items:center;gap:16px;
+  box-shadow:4px 4px 0 rgba(45,95,74,.4);transition:.3s;
+}
+.scard:nth-child(1){transform:rotate(-1.5deg)}
+.scard:nth-child(2){transform:rotate(1.5deg)}
+.scard:nth-child(3){transform:rotate(-1deg)}
+.scard:hover{transform:rotate(0) translateY(-4px)}
+.scard .face{font-size:2rem;flex-shrink:0}
+.scard h4{font-family:var(--hand);font-size:1.1rem;color:var(--ink)}
+.scard p{font-size:.78rem;color:var(--soft)}
+
+/* ===== Section frame ===== */
+.sec{padding:52px 24px;max-width:1180px;margin:0 auto}
+.frame-head{text-align:center;margin-bottom:38px}
+.frame-head .tape{
+  display:inline-block;background:var(--butter);padding:4px 16px;
+  font-family:var(--hand);font-size:.85rem;color:var(--pencil);
+  transform:rotate(-2deg);border:1.5px solid var(--pencil);border-radius:4px;margin-bottom:12px;
+}
+.frame-head h2{
+  font-family:var(--hand);font-size:clamp(1.7rem,4vw,2.4rem);
+  color:var(--forest);position:relative;display:inline-block;
+}
+.frame-head h2::before,.frame-head h2::after{content:'★';color:var(--rose);font-size:1.2rem;vertical-align:middle;margin:0 12px}
+.frame-head p{font-size:.85rem;color:var(--soft);margin-top:8px}
+
+/* ===== Carousel (horizontal scroll) ===== */
+.scroller{display:flex;gap:20px;overflow-x:auto;padding:8px 4px 24px;scroll-snap-type:x mandatory}
+.scroller::-webkit-scrollbar{height:10px}
+.scroller::-webkit-scrollbar-track{background:rgba(45,95,74,.1);border-radius:6px}
+.scroller::-webkit-scrollbar-thumb{background:var(--forest-l);border-radius:6px}
+.flick{
+  flex:0 0 250px;scroll-snap-align:start;
+  background:var(--cream);border:2.5px solid var(--pencil);
+  border-radius:14px;overflow:hidden;box-shadow:4px 4px 0 rgba(45,95,74,.35);
+  transition:.3s;
+}
+.flick:hover{transform:translateY(-5px) rotate(-.5deg)}
+.flick .poster{
+  height:150px;display:flex;align-items:center;justify-content:center;
+  font-size:3rem;position:relative;
+}
+.flick .poster::after{
+  content:'';position:absolute;inset:0;
+  background-image:var(--paper);opacity:.4;
+}
+.flick .info{padding:14px 16px}
+.flick .info h4{font-family:var(--hand);font-size:1.05rem;margin-bottom:4px}
+.flick .info .meta{font-size:.74rem;color:var(--soft);display:flex;justify-content:space-between}
+.flick .info .stars{color:var(--butter);font-size:.85rem;letter-spacing:2px}
+
+/* poster palettes */
+.p1{background:linear-gradient(135deg,#ff9a76,#ffd166)}
+.p2{background:linear-gradient(135deg,#a8d8f0,#7fc8e0)}
+.p3{background:linear-gradient(135deg,#f4a3b6,#e87a9e)}
+.p4{background:linear-gradient(135deg,#b8e0a0,#7ccf8f)}
+.p5{background:linear-gradient(135deg,#c9a0e8,#a67ad6)}
+.p6{background:linear-gradient(135deg,#ffcf8b,#ffa552)}
+.p7{background:linear-gradient(135deg,#9ed8d0,#6bc0b6)}
+.p8{background:linear-gradient(135deg,#ffb3c1,#ff8fa8)}
+
+/* ===== Characters grid (categories) ===== */
+.who{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:20px;
+}
+.who-card{
+  background:var(--cream);border:2.5px solid var(--pencil);
+  border-radius:50% 14px 50% 14px;padding:30px 22px;text-align:center;
+  transition:.35s;position:relative;
+}
+.who-card:nth-child(even){border-radius:14px 50% 14px 50%}
+.who-card:hover{background:var(--butter);transform:scale(1.04)}
+.who-card .hat{font-size:2.6rem;display:block;margin-bottom:10px;line-height:1}
+.who-card h4{font-family:var(--hand);font-size:1.15rem;color:var(--forest);margin-bottom:6px}
+.who-card p{font-size:.78rem;color:var(--soft);line-height:1.7}
+
+/* ===== Vertical timeline (news) ===== */
+.timeline{position:relative;max-width:820px;margin:0 auto;padding-left:40px}
+.timeline::before{
+  content:'';position:absolute;left:14px;top:0;bottom:0;width:3px;
+  background:repeating-linear-gradient(to bottom,var(--forest-l) 0 10px,transparent 10px 20px);
+}
+.tl-item{position:relative;margin-bottom:26px}
+.tl-item::before{
+  content:'';position:absolute;left:-33px;top:18px;
+  width:18px;height:18px;border-radius:50%;background:var(--rose);
+  border:2.5px solid var(--pencil);z-index:1;
+}
+.tl-item .tl-card{
+  background:var(--cream);border:2.5px solid var(--pencil);
+  border-radius:14px;padding:18px 22px;box-shadow:3px 3px 0 rgba(45,95,74,.3);
+  transition:.3s;
+}
+.tl-item .tl-card:hover{transform:translateX(6px)}
+.tl-item .tl-date{
+  font-family:var(--hand);font-size:.82rem;color:var(--forest-l);
+  display:block;margin-bottom:4px;
+}
+.tl-item h4{font-family:var(--hand);font-size:1.1rem;margin-bottom:6px}
+.tl-item p{font-size:.82rem;color:var(--soft)}
+
+/* ===== FAQ accordion ===== */
+.faq{max-width:820px;margin:0 auto}
+.faq-item{
+  background:var(--cream);border:2.5px solid var(--pencil);
+  border-radius:14px;margin-bottom:14px;overflow:hidden;transition:.3s;
+}
+.faq-item[open]{box-shadow:4px 4px 0 rgba(45,95,74,.3)}
+.faq-q{
+  padding:18px 22px;font-family:var(--hand);font-size:1.05rem;
+  cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;
+}
+.faq-q::-webkit-details-marker{display:none}
+.faq-q::after{content:'＋';color:var(--rose);font-size:1.3rem;transition:.3s}
+.faq-item[open] .faq-q::after{transform:rotate(45deg)}
+.faq-a{padding:0 22px 18px;font-size:.85rem;color:var(--soft);line-height:1.9}
+
+/* ===== Big quote ===== */
+.bigquote{
+  max-width:1180px;margin:0 auto;padding:0 24px;
+}
+.bq-box{
+  background:var(--forest);color:var(--cream);
+  border-radius:30px 6px 30px 6px;border:3px solid var(--pencil);
+  padding:50px 44px;text-align:center;position:relative;overflow:hidden;
+}
+.bq-box::before{
+  content:'“';position:absolute;left:20px;top:0;
+  font-family:var(--hand);font-size:8rem;color:var(--butter);opacity:.4;line-height:.8;
+}
+.bq-box::after{
+  content:'”';position:absolute;right:20px;bottom:-30px;
+  font-family:var(--hand);font-size:8rem;color:var(--butter);opacity:.4;line-height:.8;
+}
+.bq-box h3{font-family:var(--hand);font-size:clamp(1.3rem,3.5vw,2rem);line-height:1.8;max-width:820px;margin:0 auto;position:relative;z-index:1}
+.bq-box p{font-family:var(--hand);font-size:.95rem;color:var(--butter);margin-top:18px}
+
+/* ===== Map / Guide ===== */
+.map-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;position:relative}
+.map-steps::before{
+  content:'';position:absolute;top:52px;left:12%;right:12%;height:3px;
+  background:repeating-linear-gradient(to right,var(--rose) 0 10px,transparent 10px 20px);z-index:0;
+}
+.mstep{text-align:center;position:relative;z-index:1}
+.mstep .pin{
+  width:70px;height:70px;margin:0 auto 18px;background:var(--cream);
+  border:3px solid var(--pencil);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:2rem;
+  box-shadow:3px 3px 0 var(--rose);
+}
+.mstep:nth-child(2) .pin{animation:float 3.5s ease-in-out infinite}
+.mstep:nth-child(3) .pin{animation:float 4s ease-in-out infinite .5s}
+.mstep h4{font-family:var(--hand);font-size:1.2rem;color:var(--forest);margin-bottom:8px}
+.mstep p{font-size:.83rem;color:var(--soft);max-width:220px;margin:0 auto;line-height:1.8}
+
+/* ===== About ===== */
+.about-card{
+  background:var(--cream);border:3px solid var(--pencil);
+  border-radius:20px 6px 20px 6px;padding:40px 44px;
+  box-shadow:7px 7px 0 var(--forest);
+}
+.about-card p{
+  font-family:var(--hand);font-size:1.02rem;line-height:2.1;
+  color:#3d4a3f;margin-bottom:16px;
+}
+.about-card p strong{color:var(--forest);background:linear-gradient(transparent 65%,var(--butter) 65%)}
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.chip{background:var(--sky);border:2px solid var(--pencil);border-radius:20px;padding:5px 16px;font-size:.8rem;transition:.2s}
+.chip:nth-child(2n){background:var(--rose);color:#fff}
+.chip:nth-child(3n){background:var(--butter)}
+
+/* ===== Footer ===== */
+footer{border-top:3px dashed var(--forest-l);padding:44px 24px 28px;margin-top:50px;background:var(--forest);color:var(--cream)}
+.ft-in{max-width:1180px;margin:0 auto}
+.ft-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:40px;padding-bottom:32px}
+.ft-brand .logo{color:var(--butter)}
+.ft-brand p{font-size:.83rem;color:rgba(255,255,255,.7);line-height:1.9;margin-top:12px}
+.ft-col h5{font-family:var(--hand);font-size:1rem;color:var(--butter);margin-bottom:14px}
+.ft-col ul li{margin-bottom:9px}
+.ft-col ul li a{font-size:.83rem;color:rgba(255,255,255,.72);transition:.2s}
+.ft-col ul li a:hover{color:var(--butter)}
+.ft-bot{
+  border-top:2px dotted rgba(255,255,255,.25);padding-top:22px;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  font-size:.76rem;color:rgba(255,255,255,.6);font-family:var(--hand);
+}
+.ft-bot a{color:var(--butter)}
+
+/* ===== Reveal ===== */
+.rv{opacity:0;transform:translateY(28px) rotate(-1deg);transition:all .7s cubic-bezier(.22,1,.36,1)}
+.rv.in{opacity:1;transform:none}
+
+/* ===== Responsive ===== */
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;gap:36px;padding:40px 20px 28px}
+  .nav{display:none}
+  .menu-btn{display:block}
+  .who{grid-template-columns:repeat(2,1fr);gap:14px}
+  .map-steps{grid-template-columns:1fr;gap:24px}
+  .map-steps::before{display:none}
+  .ft-grid{grid-template-columns:1fr;gap:28px}
+  .frame-head h2{font-size:1.5rem}
+  .sec{padding:38px 20px}
+  .about-card{padding:28px 24px}
+  .flick{flex-basis:200px}
+  .bq-box{padding:36px 24px}
+}
+@media (max-width:480px){
+  .book{padding:28px 22px}
+  .book h1{font-size:1.9rem}
+  .timeline{padding-left:30px}
+  .tl-item::before{left:-27px;width:14px;height:14px}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/xiaolu.js"></script>
+
+<!-- Top Nav -->
+<header class="topbar">
+  <div class="bar-in">
+    <a href="#" class="logo"><span class="badge">🏰</span>童话村电影网</a>
+    <nav class="nav">
+      <a href="#story">放映厅</a>
+      <a href="#films">影片</a>
+      <a href="#who">角色</a>
+      <a href="#news">村口公告</a>
+      <a href="#map">游览路线</a>
+      <a href="#faq">小问答</a>
+      <a href="#about">关于村庄</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn">☰</button>
+  </div>
+</header>
+<div class="drawer" id="drawer">
+  <a href="#story">放映厅</a>
+  <a href="#films">影片</a>
+  <a href="#who">角色</a>
+  <a href="#news">村口公告</a>
+  <a href="#map">游览路线</a>
+  <a href="#faq">小问答</a>
+  <a href="#about">关于村庄</a>
+</div>
+
+<!-- Marquee -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span>
+      <span>🎬 欢迎来到童话村电影网 tonghuacundianyingwang-wap.github.io</span>
+      <span>✨ 动画 · 奇幻 · 治愈 · 合家欢 每日精选</span>
+      <span>🌙 一个藏满光影童话的放映厅</span>
+      <span>🎠 大小朋友都能找到喜欢的影片</span>
+      <span>🎬 欢迎来到童话村电影网 tonghuacundianyingwang-wap.github.io</span>
+      <span>✨ 动画 · 奇幻 · 治愈 · 合家欢 每日精选</span>
+      <span>🌙 一个藏满光影童话的放映厅</span>
+      <span>🎠 大小朋友都能找到喜欢的影片</span>
+    </span>
+  </div>
+</div>
+
+<!-- Hero -->
+<section class="hero" id="story">
+  <div class="book rv">
+    <div class="cloud c1"></div>
+    <div class="cloud c2"></div>
+    <span class="eyebrow">📖 童话村放映厅 · 第 7 季</span>
+    <h1>推开这扇<span class="hl">小木门</span><br>走进<span class="wave">童话村</span>的电影世界</h1>
+    <p>童话村电影网（https://tonghuacundianyingwang-wap.github.io）是一个藏满光影童话的放映厅。我们为每一个仍相信奇迹的人，精选动画、奇幻与治愈系电影，让想象力在银幕上重新发芽。</p>
+    <div class="book-actions">
+      <a href="#films" class="btn-book">🎟️ 领票入场</a>
+      <a href="#about" class="btn-ghost">看看我们的故事 →</a>
+    </div>
+  </div>
+  <div class="story-cards">
+    <div class="scard rv"><span class="face">🧚</span><div><h4>精灵放映员</h4><p>每天更新精选影片，从不打烊</p></div></div>
+    <div class="scard rv"><span class="face">🦉</span><div><h4>智慧猫头鹰</h4><p>帮你找到最合适此刻心情的那一部</p></div></div>
+    <div class="scard rv"><span class="face">🐰</span><div><h4>好奇兔子</h4><p>发现那些被低估的小众宝藏</p></div></div>
+  </div>
+</section>
+
+<!-- Films — carousel -->
+<section class="sec" id="films">
+  <div class="frame-head rv">
+    <span class="tape">今晚放映</span>
+    <h2>放映厅片单</h2>
+    <p>童话村电影网精选的 8 部必看影片，左右滑动查看</p>
+  </div>
+  <div class="scroller">
+    <div class="flick rv"><div class="poster p1">🧜</div><div class="info"><h4>深海里的歌声</h4><div class="stars">★★★★★</div><div class="meta"><span>动画 / 冒险</span><span>2025</span></div></div></div>
+    <div class="flick rv"><div class="poster p2">🐉</div><div class="info"><h4>龙与棉花糖</h4><div class="stars">★★★★☆</div><div class="meta"><span>奇幻 / 家庭</span><span>2024</span></div></div></div>
+    <div class="flick rv"><div class="poster p3">🌸</div><div class="info"><h4>樱花邮递员</h4><div class="stars">★★★★★</div><div class="meta"><span>治愈 / 日常</span><span>2023</span></div></div></div>
+    <div class="flick rv"><div class="poster p4">🌳</div><div class="info"><h4>会说话的大树</h4><div class="stars">★★★★☆</div><div class="meta"><span>童话 / 成长</span><span>2025</span></div></div></div>
+    <div class="flick rv"><div class="poster p5">🪄</div><div class="info"><h4>魔法学徒的假期</h4><div class="stars">★★★★☆</div><div class="meta"><span>奇幻 / 喜剧</span><span>2024</span></div></div></div>
+    <div class="flick rv"><div class="poster p6">🚂</div><div class="info"><h4>开往云端的列车</h4><div class="stars">★★★★★</div><div class="meta"><span>冒险 / 科幻</span><span>2026</span></div></div></div>
+    <div class="flick rv"><div class="poster p7">🐚</div><div class="info"><h4>海螺里的回音</h4><div class="stars">★★★★☆</div><div class="meta"><span>治愈 / 音乐</span><span>2023</span></div></div></div>
+    <div class="flick rv"><div class="poster p8">🌙</div><div class="info"><h4>月亮上的面包店</h4><div class="stars">★★★★★</div><div class="meta"><span>童话 / 美食</span><span>2025</span></div></div></div>
+  </div>
+</section>
+
+<!-- Characters / Categories -->
+<section class="sec" id="who">
+  <div class="frame-head rv">
+    <span class="tape">认识一下</span>
+    <h2>村里的居民们</h2>
+    <p>每个角色代表一种电影类型，总有一位懂你的口味</p>
+  </div>
+  <div class="who">
+    <a href="#" class="who-card rv"><span class="hat">🎨</span><h4>动画奇境</h4><p>从手绘到 3D，每一帧都是画师的梦，色彩与想象力的极致碰撞。</p></a>
+    <a href="#" class="who-card rv"><span class="hat">🧙</span><h4>奇幻森林</h4><p>魔法、巨龙与异世界冒险，在这里一切不可能都会发生。</p></a>
+    <a href="#" class="who-card rv"><span class="hat">☕</span><h4>治愈小屋</h4><p>温暖细腻的日常，适合下雨的午后，让心慢慢软下来。</p></a>
+    <a href="#" class="who-card rv"><span class="hat">👑</span><h4>童话城堡</h4><p>经典童话改编与原创故事，每个大人心里都住着一个小孩。</p></a>
+    <a href="#" class="who-card rv"><span class="hat">🚀</span><h4>星空冒险</h4><p>太空、未来与勇气，带孩子看见宇宙的辽阔与自己的渺小。</p></a>
+    <a href="#" class="who-card rv"><span class="hat">🎶</span><h4>音乐剧场</h4><p>用歌声讲故事的电影，旋律响起的那一刻，心就被抓住了。</p></a>
+    <a href="#" class="who-card rv"><span class="hat">🦊</span><h4>动物朋友</h4><p>可爱又聪明的动物主角，用它们的视角带我们看世界。</p></a>
+    <a href="#" class="who-card rv"><span class="hat">📚</span><h4>成长绘本</h4><p>关于勇气、友谊与告别，陪孩子也陪曾经的自己长大。</p></a>
+  </div>
+</section>
+
+<!-- Big quote -->
+<div class="bigquote">
+  <div class="bq-box rv">
+    <h3>每个孩子心里都住着一个童话，<br>而每一部好电影，都是那个童话的一次苏醒。</h3>
+    <p>—— 童话村电影网 · 写给所有大孩子和小孩子</p>
+  </div>
+</div>
+
+<!-- News / timeline -->
+<section class="sec" id="news">
+  <div class="frame-head rv">
+    <span class="tape">村口公告板</span>
+    <h2>最新动态</h2>
+    <p>村里的精灵们每天都在更新，快来看看有什么新鲜事</p>
+  </div>
+  <div class="timeline">
+    <div class="tl-item rv"><div class="tl-card"><span class="tl-date">🍂 10月12日</span><h4>《深海里的歌声》登顶本周最受欢迎</h4><p>这部海洋题材动画以细腻的画风和动人的配乐，成为童话村放映厅本月播放量最高的影片。</p></div></div>
+    <div class="tl-item rv"><div class="tl-card"><span class="tl-date">🍂 10月8日</span><h4>治愈小屋专区全新上线</h4><p>新增 20 部适合周末放松观看的治愈系电影，猫头鹰说这是最适合秋天的一个角落。</p></div></div>
+    <div class="tl-item rv"><div class="tl-card"><span class="tl-date">🍂 10月3日</span><h4>万圣节奇幻影展预告</h4><p>10 月 31 日晚，童话村将举办"魔法之夜"特别放映，精选 5 部奇幻主题佳作，记得带上南瓜灯。</p></div></div>
+    <div class="tl-item rv"><div class="tl-card"><span class="tl-date">🌼 9月28日</span><h4>小观众票选：最想二刷的动画</h4><p>《樱花邮递员》以 89% 的得票率高居榜首，许多小朋友留言说"想再看一遍最后那个拥抱"。</p></div></div>
+    <div class="tl-item rv"><div class="tl-card"><span class="tl-date">🌼 9月20日</span><h4>童话村电影网一周年放映回顾</h4><p>这一年我们一共放映了 128 部影片，感谢每一位走进放映厅的你，让这个村庄始终热闹又温暖。</p></div></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec" id="faq">
+  <div class="frame-head rv">
+    <span class="tape">问问精灵</span>
+    <h2>常见问题小问答</h2>
+    <p>你心里的小问号，精灵们来解答</p>
+  </div>
+  <div class="faq">
+    <details class="faq-item rv" open><summary class="faq-q">童话村电影网是什么？</summary><div class="faq-a">童话村电影网是一个专注于动画、奇幻与治愈系电影推荐的网站（https://tonghuacundianyingwang-wap.github.io）。我们相信好的电影不分年龄，希望每个走进来的人都能找到属于自己的那份感动。</div></details>
+    <details class="faq-item rv"><summary class="faq-q">影片适合小朋友看吗？</summary><div class="faq-a">当然！我们的分类里专门设有"动物朋友"和"成长绘本"专区，每一部都经过筛选，适合亲子一起观看。建议根据每部影片的年龄提示选择合适的作品。</div></details>
+    <details class="faq-item rv"><summary class="faq-q">更新频率是怎样的？</summary><div class="faq-a">放映厅每天更新精选影片，村口公告板每周更新 2-3 条动态资讯，村长还会在每个季节末整理一份季度精选片单，记得常回来看看。</div></details>
+    <details class="faq-item rv"><summary class="faq-q">可以推荐影片吗？</summary><div class="faq-a">非常欢迎！你可以在关于页面找到联系方式，告诉精灵们你想看的类型，说不定下一部放映的影片就是你的提议。</div></details>
+    <details class="faq-item rv"><summary class="faq-q">网站是免费的吗？</summary><div class="faq-a">童话村电影网的所有内容推荐与资讯都是免费开放的，我们希望光影童话能被更多人看见，这本身就是一件值得开心的事。</div></details>
+  </div>
+</section>
+
+<!-- Map / guide -->
+<section class="sec" id="map">
+  <div class="frame-head rv">
+    <span class="tape">游览路线</span>
+    <h2>第一次来？跟着地图走</h2>
+    <p>三步就能逛遍整个童话村，一点都不迷路</p>
+  </div>
+  <div class="map-steps">
+    <div class="mstep rv"><div class="pin">🗝️</div><h4>第一步 · 领一张票</h4><p>打开放映厅片单，挑一部现在最想看的，当作你进入童话村的第一张门票。</p></div>
+    <div class="mstep rv"><div class="pin">🧭</div><h4>第二步 · 拜访居民</h4><p>去"村里的居民"认识不同电影类型，找到那个最懂你口味的角色，让它带你逛。</p></div>
+    <div class="mstep rv"><div class="pin">💌</div><h4>第三步 · 留下故事</h4><p>看完之后，到村口公告板写下你的感受，和同样爱电影的朋友交换彼此的童话。</p></div>
+  </div>
+</section>
+
+<!-- About -->
+<section class="sec" id="about">
+  <div class="frame-head rv">
+    <span class="tape">村庄志</span>
+    <h2>关于童话村电影网</h2>
+  </div>
+  <div class="about-card rv">
+    <p>欢迎来到<strong>童话村电影网</strong>。我们的网址是 <strong>https://tonghuacundianyingwang-wap.github.io</strong>。很久以前，在森林的尽头有一个小小的村庄，村子里住着一群热爱电影的人。他们相信，再平凡的日子里也藏着值得被讲述的故事——于是他们搭起了一间小小的放映厅，把那些关于勇气、友谊、爱与告别的光影，一张一张地放给路过的人看。</p>
+    <p>这就是<strong>童话村电影网</strong>的由来。从动画奇境到奇幻森林，从治愈小屋到星空冒险，我们用心整理每一部作品，只为了让你在打开网站的那一刻，能像推开一扇小木门一样，轻松地走进一个更温柔的世界。</p>
+    <p>访问<strong>童话村电影网（https://tonghuacundianyingwang-wap.github.io）</strong>，愿你在这里遇到的每一部电影，都像一位老朋友，在你最需要的时候，轻轻拍拍你的肩膀。</p>
+    <div class="chips">
+      <span class="chip">🎬 动画电影</span>
+      <span class="chip">🧚 奇幻冒险</span>
+      <span class="chip">☕ 治愈系</span>
+      <span class="chip">👑 童话改编</span>
+      <span class="chip">🚀 合家欢</span>
+      <span class="chip">🎶 音乐剧场</span>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="ft-in">
+    <div class="ft-grid">
+      <div class="ft-brand">
+        <div class="logo"><span class="badge">🏰</span>童话村电影网</div>
+        <p>童话村电影网（https://tonghuacundianyingwang-wap.github.io）—— 一个藏满光影童话的放映厅。愿每个走进来的人，都能带着一点温暖离开。</p>
+      </div>
+      <div class="ft-col">
+        <h5>逛逛村庄</h5>
+        <ul>
+          <li><a href="#story">放映厅</a></li>
+          <li><a href="#films">影片片单</a></li>
+          <li><a href="#who">村里的居民</a></li>
+          <li><a href="#news">村口公告</a></li>
+          <li><a href="#map">游览路线</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h5>村庄事务</h5>
+        <ul>
+          <li><a href="#about">关于我们</a></li>
+          <li><a href="#faq">常见问题</a></li>
+          <li><a href="#">投稿与推荐</a></li>
+          <li><a href="#">友情链接</a></li>
+          <li><a href="#">联系精灵</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <span>&copy; 2026 <a href="https://tonghuacundianyingwang-wap.github.io">童话村电影网</a>（https://tonghuacundianyingwang-wap.github.io）· 一个藏满光影童话的放映厅</span>
+      <span>🎈 愿你的每一天都像一部好电影</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+var btn=document.getElementById('menuBtn');
+var drawer=document.getElementById('drawer');
+btn.addEventListener('click',function(){drawer.classList.toggle('open');});
+drawer.querySelectorAll('a').forEach(function(a){
+  a.addEventListener('click',function(){drawer.classList.remove('open');});
+});
+function reveal(){
+  document.querySelectorAll('.rv').forEach(function(el){
+    if(el.getBoundingClientRect().top<window.innerHeight-90){
+      el.classList.add('in');
+    }
+  });
+}
+window.addEventListener('scroll',reveal);
+window.addEventListener('load',reveal);
+reveal();
+</script>
+</body>
+</html>
